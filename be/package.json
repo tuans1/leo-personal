@@ -21,10 +21,12 @@
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
+    "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/platform-socket.io": "^11.1.9",
     "@nestjs/websockets": "^11.1.9",
+    "@supabase/supabase-js": "^2.89.0",
     "ioredis": "^5.8.2",
     "mysql2": "^3.16.0",
     "reflect-metadata": "^0.2.2",
