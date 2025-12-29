@@ -108,11 +108,11 @@ export class CartService {
     }
 
     // Acquire distributed lock
-    const lockValue = await this.acquireLock(productId);
-    console.log('🚀 ~ CartService ~ checkout ~ lockValue:', lockValue);
-    if (!lockValue) {
-      throw new Error('Failed to acquire lock. Please try again.');
-    }
+    // const lockValue = await this.acquireLock(productId);
+    // console.log('🚀 ~ CartService ~ checkout ~ lockValue:', lockValue);
+    // if (!lockValue) {
+    //   throw new Error('Failed to acquire lock. Please try again.');
+    // }
     try {
       // Use transaction to ensure atomicity
       const result = await this.dataSource.transaction(
@@ -120,15 +120,21 @@ export class CartService {
           // Get product with lock (FOR UPDATE)
           const product = await transactionalEntityManager
             .createQueryBuilder(Product, 'product')
-            .setLock('pessimistic_write')
+            .setLock('pessimistic_write', undefined, {
+              onLocked: 'nowait',
+            } as string)
             .where('product.id = :id', { id: productId })
             .getOne();
 
           if (!product) {
             throw new Error('Product not found');
           }
-
-          const currentQuantity = product.quantity ?? 0;
+          console.log('🚀 ~ CartService ~ checkout ~ product:', product);
+          return {
+            orderId: 111,
+            orderItemId: 1111,
+          };
+          const currentQuantity = product?.quantity ?? 0;
 
           // Check if enough inventory
           if (currentQuantity < quantity) {
@@ -161,7 +167,7 @@ export class CartService {
             orderId: savedOrder.id,
             productId,
             quantity,
-            price: product.price,
+            price: product?.price ?? 0,
           });
           const savedOrderItem = await transactionalEntityManager.save(
             OrderItem,
@@ -178,7 +184,7 @@ export class CartService {
         },
       );
 
-      return result;
+      return result ?? { orderId: 0, orderItemId: 0 };
     } catch (err: unknown) {
       console.log('🚀 ~ CartService ~ checkout ~ err:', err);
       throw err;

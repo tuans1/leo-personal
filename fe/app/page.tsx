@@ -25,6 +25,22 @@ export default function Home() {
       href: "/exercises/multi-room-chat",
       status: "completed",
     },
+    {
+      id: "apollo",
+      title: "Apollo Client Cache Demo",
+      description:
+        "Demo Apollo Client cache với mock data, kiểm tra cache trong DevTools",
+      href: "/exercises/apollo",
+      status: "completed",
+    },
+    {
+      id: "apollo-error",
+      title: "Apollo ErrorLink Demo",
+      description:
+        "Demo ErrorLink xử lý GraphQL errors, Network errors, và Timeout errors",
+      href: "/exercises/apollo/error-demo",
+      status: "completed",
+    },
   ];
 
   return (
@@ -77,7 +93,8 @@ export default function Home() {
                 </span>
               </div>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                Ví dụ về SSR: cách render trên server, fetch data trước khi gửi HTML
+                Ví dụ về SSR: cách render trên server, fetch data trước khi gửi
+                HTML
               </p>
               <div className="flex items-center text-sm text-green-600 dark:text-green-400 font-medium group-hover:underline">
                 Xem ví dụ →
