@@ -41,6 +41,14 @@ export default function Home() {
       href: "/exercises/apollo/error-demo",
       status: "completed",
     },
+    {
+      id: "apollo-ssr",
+      title: "Apollo SSR Demo",
+      description:
+        "Demo Server-Side Rendering với Apollo Client, cache hydration, và SSR vs CSR",
+      href: "/exercises/apollo/ssr-demo",
+      status: "completed",
+    },
   ];
 
   return (
