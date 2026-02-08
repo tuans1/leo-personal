@@ -295,34 +295,20 @@ Khi sử dụng SSR với Apollo Client, có một vấn đề quan trọng về
 
 ```typescript
 // Server Component (page.tsx)
-import { getServerClient, serializeCache } from "@/app/lib/apollo/ssr-utils";
-
-export default async function Page() {
+import { getServerClient, serializeCache } from "@/app/lib/apollo/ssr-utils";export default async function Page() {
   // Tạo server client instance
-  const serverClient = getServerClient();
-
-  // Fetch data trên server
-  const { data } = await serverClient.query({ query: GET_TODOS });
-
-  // Serialize cache
-  const initialCache = serializeCache(serverClient);
-
-  // Pass cache xuống client component
+  const serverClient = getServerClient();  // Fetch data trên server
+  const { data } = await serverClient.query({ query: GET_TODOS });  // Serialize cache
+  const initialCache = serializeCache(serverClient);  // Pass cache xuống client component
   return <ClientComponent initialCache={initialCache} />;
 }
-```
-
-```typescript
+``````typescript
 // Client Component
 "use client";
-import { makeClientClient } from "@/app/lib/apollo/make-client";
-
-export default function ClientComponent({ initialCache }) {
+import { makeClientClient } from "@/app/lib/apollo/make-client";export default function ClientComponent({ initialCache }) {
   const client = useMemo(() => {
     return makeClientClient(initialCache); // Restore cache
-  }, [initialCache]);
-
-  return (
+  }, [initialCache]);  return (
     <ApolloProvider client={client}>
       {/* useQuery sẽ sử dụng cache, không fetch từ network */}
     </ApolloProvider>
@@ -330,10 +316,6 @@ export default function ClientComponent({ initialCache }) {
 }
 ```
 
-### Key Files
-
-- `make-client.ts`: Factory functions để tạo server/client instances
+### Key Files- `make-client.ts`: Factory functions để tạo server/client instances
 - `ssr-utils.ts`: Utilities cho SSR (getServerClient, serializeCache)
-- `apollo-provider.tsx`: Provider hỗ trợ SSR với `initialCache` prop
-
-Xem thêm: [SSR Demo README](/app/exercises/apollo/ssr-demo/README.md)
+- `apollo-provider.tsx`: Provider hỗ trợ SSR với `initialCache` propXem thêm: [SSR Demo README](/app/exercises/apollo/ssr-demo/README.md)

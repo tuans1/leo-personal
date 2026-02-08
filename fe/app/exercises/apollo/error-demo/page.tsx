@@ -124,7 +124,7 @@ export default function ApolloErrorDemoPage() {
             </button>
           </div>
           <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
-            Chọn error type và click "Test Query" để xem ErrorLink xử lý errors
+            Chọn error type và click Test Query để xem ErrorLink xử lý errors
           </p>
         </div>
 

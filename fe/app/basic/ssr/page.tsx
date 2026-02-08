@@ -89,6 +89,12 @@ export default async function SSRPage() {
           >
             ← Về trang chủ
           </Link>
+          <Link
+            href="/basic/ssr/example"
+            className="ml-4 inline-flex items-center text-green-600 dark:text-green-400 hover:underline mb-4"
+          >
+            Ví dụ A→B→C (composition)
+          </Link>
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
             Server-Side Rendering (SSR) Example
           </h1>

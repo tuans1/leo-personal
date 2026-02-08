@@ -108,6 +108,46 @@ export default function Home() {
                 Xem ví dụ →
               </div>
             </Link>
+            <Link
+              href="/basic/action-state"
+              className="group relative bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-gray-200 dark:border-gray-700 hover:border-sky-500 dark:hover:border-sky-400"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                  useActionState vs state thủ công
+                </h3>
+                <span className="px-2 py-1 text-xs font-medium bg-sky-100 dark:bg-sky-900 text-sky-800 dark:text-sky-200 rounded-full">
+                  Basic
+                </span>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                So sánh form dùng useActionState với form tự quản lý loading /
+                error / success
+              </p>
+              <div className="flex items-center text-sm text-sky-600 dark:text-sky-400 font-medium group-hover:underline">
+                Xem ví dụ →
+              </div>
+            </Link>
+            <Link
+              href="/basic/list-form"
+              className="group relative bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-gray-200 dark:border-gray-700 hover:border-violet-500 dark:hover:border-violet-400"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                  Server list + Client form
+                </h3>
+                <span className="px-2 py-1 text-xs font-medium bg-violet-100 dark:bg-violet-900 text-violet-800 dark:text-violet-200 rounded-full">
+                  Basic
+                </span>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                List do Server Component, form thêm item là Client; list cập
+                nhật ngay sau khi thêm
+              </p>
+              <div className="flex items-center text-sm text-violet-600 dark:text-violet-400 font-medium group-hover:underline">
+                Xem ví dụ →
+              </div>
+            </Link>
           </div>
         </div>
 

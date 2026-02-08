@@ -120,9 +120,7 @@ export class CartService {
           // Get product with lock (FOR UPDATE)
           const product = await transactionalEntityManager
             .createQueryBuilder(Product, 'product')
-            .setLock('pessimistic_write', undefined, {
-              onLocked: 'nowait',
-            } as string)
+            .setLock('pessimistic_write')
             .where('product.id = :id', { id: productId })
             .getOne();
 
