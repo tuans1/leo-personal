@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { S3Module } from './aws/s3';
 import { CounterModule } from './exercises/counter/counter.module';
 import { ChatModule } from './exercises/chat/chat.module';
 import { MultiRoomChatModule } from './exercises/multi-room-chat/multi-room-chat.module';
@@ -11,8 +12,9 @@ import { TypeOrmModule } from './typeorm/typeorm.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    RedisModule,
-    TypeOrmModule,
+    // RedisModule,
+    // TypeOrmModule,
+    S3Module,
     // ========================================
     CounterModule,
     ChatModule,
@@ -21,4 +23,4 @@ import { TypeOrmModule } from './typeorm/typeorm.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

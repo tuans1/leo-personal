@@ -1,0 +1,132 @@
+{
+    "info": {
+        "name": "AWS S3 API",
+        "description": "Collection cho S3 controller: upload, get file, presigned URL, delete",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:4000"
+        },
+        {
+            "key": "s3Key",
+            "value": "my-folder/sample.pdf"
+        }
+    ],
+    "item": [
+        {
+            "name": "Upload file",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "file",
+                            "type": "file",
+                            "src": ""
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/aws/s3/upload?key={{s3Key}}",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "aws",
+                        "s3",
+                        "upload"
+                    ],
+                    "query": [
+                        {
+                            "key": "key",
+                            "value": "{{s3Key}}",
+                            "description": "Full S3 key (hoặc dùng prefix thay key)"
+                        },
+                        {
+                            "key": "prefix",
+                            "value": "uploads",
+                            "description": "Optional: key = prefix + filename",
+                            "disabled": true
+                        }
+                    ]
+                },
+                "description": "Upload file. Field: file. Query: key (full key) hoặc prefix. Max 10MB."
+            }
+        },
+        {
+            "name": "Get file",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{baseUrl}}/aws/s3/file/{{s3Key}}",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "aws",
+                        "s3",
+                        "file",
+                        "{{s3Key}}"
+                    ]
+                },
+                "description": "Key trong path; encode / thành %2F nếu cần."
+            }
+        },
+        {
+            "name": "Get presigned URL",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{baseUrl}}/aws/s3/presigned-url?key={{s3Key}}&expiresIn=3600",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "aws",
+                        "s3",
+                        "presigned-url"
+                    ],
+                    "query": [
+                        {
+                            "key": "key",
+                            "value": "{{s3Key}}",
+                            "description": "Required"
+                        },
+                        {
+                            "key": "expiresIn",
+                            "value": "3600",
+                            "description": "Optional, 60-86400 seconds"
+                        }
+                    ]
+                },
+                "description": "Trả về url và expiresIn (giây)."
+            }
+        },
+        {
+            "name": "Delete file",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                    "raw": "{{baseUrl}}/aws/s3/file/{{s3Key}}",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "aws",
+                        "s3",
+                        "file",
+                        "{{s3Key}}"
+                    ]
+                },
+                "description": "Xóa file. Response: 204 No Content."
+            }
+        }
+    ]
+}
