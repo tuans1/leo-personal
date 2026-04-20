@@ -96,6 +96,31 @@ export class S3Controller {
     return result;
   }
 
+  @Get('presigned-upload-url')
+  async getPresignedUploadUrl(
+    @Query('key') key: string,
+    @Query('expiresIn') expiresInStr?: string,
+    @Query('contentType') contentType?: string,
+  ) {
+    if (!key?.trim()) {
+      throw new BadRequestException('Query "key" is required');
+    }
+
+    const decodedKey = decodeURIComponent(key);
+    const expiresIn = expiresInStr
+      ? Math.min(
+        Math.max(60, parseInt(expiresInStr, 10)),
+        S3_MAX_PRESIGNED_EXPIRES_IN,
+      )
+      : undefined;
+
+    return this.s3Service.getPresignedUploadUrl(
+      decodedKey,
+      expiresIn,
+      contentType?.trim() || undefined,
+    );
+  }
+
   @Delete('file/:key')
   @HttpCode(HttpStatus.NO_CONTENT)
   async deleteFile(@Param('key') key: string): Promise<void> {

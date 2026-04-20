@@ -19,6 +19,13 @@ export interface PresignedUrlResult {
   expiresIn: number;
 }
 
+/** Response for GET /aws/s3/presigned-upload-url — URL for client to PUT file directly to S3. */
+export interface PresignedUploadUrlResult {
+  url: string;
+  expiresIn: number;
+  bucket: string;
+}
+
 export interface GetFileStreamResult {
   body: Readable;
   contentType?: string;

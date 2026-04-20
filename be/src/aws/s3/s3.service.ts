@@ -7,11 +7,16 @@ import {
   S3Client,
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import { S3ConfigKey, S3_DEFAULT_PRESIGNED_EXPIRES_IN } from './s3.constants';
+import {
+  S3ConfigKey,
+  S3_DEFAULT_PRESIGNED_EXPIRES_IN,
+  S3_MAX_PRESIGNED_EXPIRES_IN,
+} from './s3.constants';
 import type {
   DeleteResult,
   GetFileStreamResult,
   PresignedUrlResult,
+  PresignedUploadUrlResult,
   UploadResult,
 } from './s3.types';
 
@@ -91,6 +96,31 @@ export class S3Service {
     return {
       url,
       expiresIn,
+    };
+  }
+
+  async getPresignedUploadUrl(
+    key: string,
+    expiresIn: number = S3_DEFAULT_PRESIGNED_EXPIRES_IN,
+    contentType?: string,
+  ): Promise<PresignedUploadUrlResult> {
+    const command = new PutObjectCommand({
+      Bucket: this.bucket,
+      Key: key,
+      ...(contentType ? { ContentType: contentType } : {}),
+    });
+
+    const effectiveExpiresIn = Math.min(
+      Math.max(60, expiresIn),
+      S3_MAX_PRESIGNED_EXPIRES_IN,
+    );
+    const url = await getSignedUrl(this.client, command, {
+      expiresIn: effectiveExpiresIn,
+    });
+    return {
+      url,
+      expiresIn: effectiveExpiresIn,
+      bucket: this.bucket,
     };
   }
 
