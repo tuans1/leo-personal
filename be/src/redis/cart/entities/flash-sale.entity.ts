@@ -22,9 +22,9 @@ export class FlashSale {
   @Column({ name: 'end_time', type: 'timestamp with time zone' })
   endTime: Date;
 
-  @ManyToOne(() => Product, (product) => product.flashSales, {
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn({ name: 'product_id' })
-  product: Product;
+  // @ManyToOne(() => Product, (product) => product.flashSales, {
+  //   onDelete: 'CASCADE',
+  // })
+  // @JoinColumn({ name: 'product_id' })
+  // product: Product;
 }

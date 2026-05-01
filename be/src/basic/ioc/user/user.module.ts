@@ -8,4 +8,3 @@ import { NotificationModule } from '../notification/notification.module';
   exports: [UserService],
 })
 export class UserModule {}
-

@@ -1,6 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { FlashSale } from './flash-sale.entity';
-import { OrderItem } from './order-item.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('products')
 export class Product {
@@ -20,9 +18,9 @@ export class Product {
   // @VersionColumn()
   // version: number;
 
-  @OneToMany(() => FlashSale, (flashSale) => flashSale.product)
-  flashSales: FlashSale[];
+  // @OneToMany(() => FlashSale, (flashSale) => flashSale.product)
+  // flashSales: FlashSale[];
 
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.product)
-  orderItems: OrderItem[];
+  // @OneToMany(() => OrderItem, (orderItem) => orderItem.product)
+  // orderItems: OrderItem[];
 }

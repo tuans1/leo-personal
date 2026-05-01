@@ -6,15 +6,19 @@ import { CounterModule } from './exercises/counter/counter.module';
 import { ChatModule } from './exercises/chat/chat.module';
 import { MultiRoomChatModule } from './exercises/multi-room-chat/multi-room-chat.module';
 import { ConfigModule } from '@nestjs/config';
-import { RedisModule } from './redis/redis.module';
 import { TypeOrmModule } from './typeorm/typeorm.module';
+import { FileModule as FileMemoryModule } from './file/upload_memory';
+import { FileModule as FileStreamModule } from './file/upload_stream';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    // import { RedisModule } from './redis/redis.module' when enabling Redis
     // RedisModule,
-    // TypeOrmModule,
-    S3Module,
+    TypeOrmModule,
+    FileMemoryModule,
+    FileStreamModule,
+    // S3Module,
     // ========================================
     CounterModule,
     ChatModule,
@@ -23,4 +27,4 @@ import { TypeOrmModule } from './typeorm/typeorm.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
